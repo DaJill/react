@@ -16,12 +16,7 @@ const middleware = applyMiddleware(thunk, logger());
 const store = createStore(allReducers, middleware);
 
 store.dispatch(fetchUserList());
-// store.dispatch((dispatch) => {
-
-//     dispatch({type: 'FETCH_USER_LIST'});
-// });
 ReactDOM.render(
-	// <Provider> 
     <Provider store={store}> 
 		<App />
 	</Provider>

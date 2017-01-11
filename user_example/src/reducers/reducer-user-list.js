@@ -1,5 +1,12 @@
 export default (state={}, action) => {
-    var newState = state;
+    var newState = {
+            event: false,
+            data: []
+    };
+    if(state !== {}){
+        newState = state;
+    }
+    
     switch(action.type){
         case "FETCH_USER_LIST": 
             newState = {
@@ -16,7 +23,18 @@ export default (state={}, action) => {
                 data: action.payload
             }
             break;
-            
+        case "DELETE_USER": 
+            newState = {
+                ...state,
+                event: action.event
+            }
+            break;
+        case "DELETE_USER_ERR":
+            newState = {
+                ...state,
+                event: action.event
+            }
+            break;
         default:
             break;
     }
