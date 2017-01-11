@@ -1,42 +1,9 @@
 import React, {Component} from 'react';
-import {bindActionCreators} from 'redux';
+// import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {addUser} from '../actions/index';
 
 class ContainerUserAdd extends Component {
-    // constructor(props) {
-    //     super(props);
-
-    //     // store.subscribe(() => {
-    //     //   // When state will be updated(in our case, when items will be fetched), we will update local component state and force component to rerender with new data.
-    //     //   this.setState({
-    //     //     items: store.getState().items;
-    //     //   });
-    //     // });
-    // }
-    createListItems(){
-        if(!this.props.UserList.event){
-            return null;
-        }
-
-        var aUserList = this.props.UserList.data;
-        // aUserList.reverse();//由小到大
-        return aUserList.map((aRowUser, iIndex) => {
-            return (
-            <tbody key={aRowUser.UserID}>
-                <tr>
-                    <th>{aRowUser.Nickname}</th>
-                    <th>{aRowUser.UserName}</th>
-                    <th>{aRowUser.Password}</th>
-                    <th>
-                      <button onClick={() => this.delectUser(aRowUser.UserID, iIndex)}>刪除</button> 
-                      <button>修改</button>
-                    </th>
-                </tr>
-            </tbody>
-            );
-        });
-    }
 
     addUser(){
         var aUser = {
@@ -44,14 +11,18 @@ class ContainerUserAdd extends Component {
             UserName: this.refs.newUserName.value,
             Password: this.refs.newPassword.value,
         }
-        aUser.UserID = 123456;
-        this.props.addUser(aUser);
-        //var a = this.getState();
-        // var a = this.store.dispatch;
-        this.props.UserList.data.unshift(aUser);
-        console.log("props",this.props.dispatch);
-        // console.log("a",a);
-        console.log("UserList",this.props.UserList.data);
+        // aUser.UserID = 123456;
+        let next = this.props.dispatch;
+        this.props.dispatch(addUser(aUser));
+        //let result = next(action)
+        // this.props.dispatch.addUser(aUser);
+        // //var a = this.getState();
+        // // var a = this.store.dispatch;
+        // this.props.UserList.data.unshift(aUser);
+        console.log("next",next);
+        console.log("state",this.props);
+        // // console.log("a",a);
+        // console.log("UserList",this.props.UserList.data);
         // if(!this.props.UserList.event){
         //     return null;
         // }
@@ -92,20 +63,20 @@ class ContainerUserAdd extends Component {
     }
 }
 
-function mapStateToProps(state){
-    return {
-        UserAdd: state.UserAdd,
-        UserList: state.UserList,
-    };
-}
+// function mapStateToProps(state){
+//     return {
+//         UserAdd: state.UserAdd,
+//         UserList: state.UserList,
+//     };
+// }
 
-function matchDispatchToProps(dispatch){
-    return bindActionCreators(
-        {
-            addUser: addUser
-        },
-        dispatch
-    );
-}
-
-export default connect(mapStateToProps, matchDispatchToProps)(ContainerUserAdd);
+// function matchDispatchToProps(dispatch){
+//     return bindActionCreators(
+//         {
+//             addUser: addUser
+//         },
+//         dispatch
+//     );
+// }
+export default connect(state => state)(ContainerUserAdd)
+//export default connect(mapStateToProps, matchDispatchToProps)(ContainerUserAdd);

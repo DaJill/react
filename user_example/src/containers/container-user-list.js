@@ -10,7 +10,6 @@ class ContainerUserList extends Component {
         }
 
         var aUserList = this.props.UserList.data;
-        // aUserList.reverse();//由小到大
         return aUserList.map((aRowUser, iIndex) => {
             return (
             <tbody key={aRowUser.UserID}>

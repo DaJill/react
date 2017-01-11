@@ -1,5 +1,5 @@
 export default (state={}, action) => {
-
+    
     var newState = {
         event: false,
         id: null
